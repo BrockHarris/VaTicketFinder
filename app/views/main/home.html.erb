@@ -1,0 +1,68 @@
+<div class="row">
+	<div class="col-xs-6">
+		<div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="control_title">Server Status: <span class="label label-success pull-right">Running</span></h4>
+      </div>
+      <div class="panel-body">
+        <% if @last_update %>
+          <h4>Last Attempt: <small><%= time_ago_in_words(@last_update.created_at) %> ago</small></h4>
+        <% else %>
+          <h4>Last Attempt: <small>None</small></h4>
+        <% end %>
+      </div>
+    </div>
+	</div>
+
+	<div class="col-xs-4 col-xs-offset-2">
+
+		<ul class="list-group">
+		<li class="list-group-item list-group-item-info">
+    <span class="badge"><%= @pos_results.count %></span>
+    <b>Available Tickets Found</b>
+  </li>
+
+  <li class="list-group-item">
+    <span class="badge"><%= @fallbacks %></span>
+    Possible Errors
+  </li>
+
+  <li class="list-group-item">
+    <span class="badge"><%= @results.count %></span>
+    Total Attempts
+  </li>
+</ul>
+
+<div class="panel-group" id="accordion">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+          Past Hour Results
+        </a>
+      </h4>
+    </div>
+    <div id="collapseOne" class="panel-collapse collapse">
+      <div class="panel-body">
+        <% unless @latest_records.empty? %>
+      	  <% @latest_records.each do |result| %>
+        	  <li class="list-group-item">
+						  <% if result.status == false %>
+        			  <b>Remark:</b> <span class="label label-success"><%= result.event %></span><br/>
+        		  <% else %>
+        			  <b>Remark:</b> <%= result.event %><br/>
+        		  <% end %>
+        		  <b>Time:</b> <%= time_ago_in_words(result.created_at) %> ago
+  				  </li>
+  			  <% end %>
+        <% else %>
+          <li class="list-group-item">Nothing Yet</li>
+        <% end %>
+      </div>
+    </div>
+  </div>
+ </div>
+	</div>
+</div>
+
+

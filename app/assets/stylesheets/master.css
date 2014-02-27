@@ -1,0 +1,14 @@
+.navbar {
+	border-radius:0px;
+}
+.container {
+	width:900px;
+	padding:15px;
+	margin:auto;
+}
+.control_title {
+	margin:0px 0 0 0;
+}
+hr {
+	margin:3px 0 3px 0;
+}
